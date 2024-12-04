@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.helloworld";
+option java_outer_classname = "HelloWorldProto";
+option objc_class_prefix = "HLW";
+
+package user;
+
+// The greeting service definition.
+service UsuarioServicio {
+  // Sends a greeting
+  rpc GetUser (GetUserRequest) returns (GetUserReply) {}
+
+  rpc ProcessImage (GetUserRequest) returns (GetUserReply) {}
+
+  rpc GetStreamImage (stream GetImage) returns (GetUserReply) {}
+
+  rpc ImageStreamReply (stream GetImage) returns (stream GetImageReply) {}
+
+  rpc GetUserBidiStream (stream GetUserRequest) returns (stream GetAllReply) {}
+}
+
+// The request message containing the user's name.
+message GetUserRequest {
+  string name = 1;
+  int32 pow = 2;
+  bytes image = 3;
+}
+
+message GetAllReply {
+  string name = 1;
+  int32 pow = 2;
+  bytes image = 3;
+}
+
+// The response message containing the greetings
+message GetUserReply {
+  string message = 1;
+}
+
+message GetImage {
+  bytes image = 1;
+}
+
+message GetImageReply {
+  bytes image = 1;
+}
